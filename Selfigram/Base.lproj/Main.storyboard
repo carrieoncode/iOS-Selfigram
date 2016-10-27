@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wn0-Um-znL" id="6cB-xG-dkd">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LVF-sJ-KKV" id="cVp-q1-ymU">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1217" y="-899"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="QaT-zc-ozq">
             <objects>
-                <viewController id="pAH-jI-8Fi" sceneMemberID="viewController">
+                <viewController id="pAH-jI-8Fi" customClass="ProfileViewController" customModule="Selfigram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gvG-aq-4xK"/>
                         <viewControllerLayoutGuide type="bottom" id="VOw-l2-cs0"/>
@@ -75,13 +75,44 @@
                     <view key="view" contentMode="scaleToFill" id="0Yb-Bn-VKB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="shm-dc-Pok">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="DYb-ki-FJY"/>
+                                    <constraint firstAttribute="height" constant="185" id="IIL-fR-GDY"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-Gd-1D1">
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="cameraButtonPressedWithSender:" destination="pAH-jI-8Fi" eventType="touchUpInside" id="M64-gp-Cls"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJO-cf-QRV">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xJO-cf-QRV" firstAttribute="top" secondItem="lRX-Gd-1D1" secondAttribute="bottom" constant="14" id="5Tz-z5-tY1"/>
+                            <constraint firstItem="lRX-Gd-1D1" firstAttribute="top" secondItem="shm-dc-Pok" secondAttribute="bottom" constant="-2" id="D0a-Za-DdQ"/>
+                            <constraint firstItem="shm-dc-Pok" firstAttribute="top" secondItem="gvG-aq-4xK" secondAttribute="bottom" constant="46" id="IMc-Rs-Nan"/>
+                            <constraint firstItem="shm-dc-Pok" firstAttribute="centerX" secondItem="0Yb-Bn-VKB" secondAttribute="centerX" id="JkN-gV-aKJ"/>
+                            <constraint firstItem="xJO-cf-QRV" firstAttribute="centerX" secondItem="0Yb-Bn-VKB" secondAttribute="centerX" id="OnU-4x-jSn"/>
+                            <constraint firstItem="shm-dc-Pok" firstAttribute="leading" secondItem="lRX-Gd-1D1" secondAttribute="trailing" constant="-65" id="yHe-e3-NYe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="haI-ob-Mu3"/>
+                    <connections>
+                        <outlet property="profileImageView" destination="shm-dc-Pok" id="2Kb-3s-pS9"/>
+                        <outlet property="usernameLabel" destination="xJO-cf-QRV" id="dk2-JV-IsZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pex-Lr-zAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257" y="600"/>
+            <point key="canvasLocation" x="1256.8" y="599.55022488755628"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="v8x-Uv-beX">
@@ -92,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.91431057453155518" green="0.26178896427154541" blue="0.40337324142456055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,7 +154,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9x6-8W-Gwy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.91431057449999997" green="0.26178896429999998" blue="0.40337324140000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -140,9 +171,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbi-YW-F1E" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activity" image="Activities" id="1RS-hI-oOt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bb9-O9-der">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bb9-O9-der">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.91431057453155518" green="0.26178896427154541" blue="0.40337324142456055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -162,6 +194,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sDG-aN-8bo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.91431057453155518" green="0.26178896427154541" blue="0.40337324142456055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -177,5 +210,6 @@
         <image name="Activities" width="25" height="25"/>
         <image name="NewsFeed" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
+        <image name="placeholder" width="256" height="256"/>
     </resources>
 </document>
