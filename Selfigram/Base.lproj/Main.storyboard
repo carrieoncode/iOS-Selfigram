@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wn0-Um-znL" id="6cB-xG-dkd">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -39,18 +39,49 @@
         <scene sceneID="MzO-rH-al0">
             <objects>
                 <tableViewController id="t8h-as-gKb" customClass="FeedTableViewController" customModule="Selfigram" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BWx-2X-fQl">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="28" sectionFooterHeight="28" id="BWx-2X-fQl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" id="LVF-sJ-KKV">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="320" id="LVF-sJ-KKV" customClass="SelfieCell" customModule="Selfigram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="375" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LVF-sJ-KKV" id="cVp-q1-ymU">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="320"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Key-zO-u60">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="250" id="AUe-yd-qhx"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5je-Bs-C4o">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEH-kt-Iqe">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="xEH-kt-Iqe" firstAttribute="leading" secondItem="cVp-q1-ymU" secondAttribute="leading" id="IZr-4Y-ubY"/>
+                                        <constraint firstItem="Key-zO-u60" firstAttribute="leading" secondItem="cVp-q1-ymU" secondAttribute="leading" id="JcU-6V-dTg"/>
+                                        <constraint firstAttribute="trailing" secondItem="Key-zO-u60" secondAttribute="trailing" id="Nhm-NT-VLf"/>
+                                        <constraint firstItem="Key-zO-u60" firstAttribute="top" secondItem="cVp-q1-ymU" secondAttribute="top" id="Vqy-7C-QRx"/>
+                                        <constraint firstItem="5je-Bs-C4o" firstAttribute="leading" secondItem="cVp-q1-ymU" secondAttribute="leading" id="YQu-lm-aLe"/>
+                                        <constraint firstItem="xEH-kt-Iqe" firstAttribute="top" secondItem="5je-Bs-C4o" secondAttribute="bottom" constant="8" id="oV7-hS-6Qp"/>
+                                        <constraint firstItem="5je-Bs-C4o" firstAttribute="top" secondItem="Key-zO-u60" secondAttribute="bottom" constant="8" id="xQ5-J5-2Wx"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="commentLabel" destination="xEH-kt-Iqe" id="3aO-ap-l65"/>
+                                    <outlet property="selfieImageView" destination="Key-zO-u60" id="ppX-cL-CBp"/>
+                                    <outlet property="usernameLabel" destination="5je-Bs-C4o" id="CQp-MC-q04"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -58,11 +89,18 @@
                             <outlet property="delegate" destination="t8h-as-gKb" id="qXw-X4-6KR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="vTg-SQ-tUq"/>
+                    <navigationItem key="navigationItem" id="vTg-SQ-tUq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="XsC-jx-vCh">
+                            <color key="tintColor" red="0.99287670850753784" green="0.99700695276260376" blue="0.99637609720230103" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="cameraButtonPressedWithSender:" destination="t8h-as-gKb" id="dxm-PK-oJs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7EW-EC-7T7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="-899"/>
+            <point key="canvasLocation" x="1216.8" y="-899.10044977511257"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="QaT-zc-ozq">
