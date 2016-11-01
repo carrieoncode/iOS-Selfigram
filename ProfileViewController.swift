@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     
-    @IBAction func cameraButtonPressed(sender: AnyObject) {
+    @IBAction func cameraButtonPressed(_ sender: AnyObject) {
         
         // 1: Create an ImagePickerController
         let pickerController = UIImagePickerController()
@@ -27,21 +27,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if TARGET_OS_SIMULATOR == 1 {
             // 3. We check if we are running on a Simulator
             //    If so, we pick a photo from the simulators Photo Library
-            pickerController.sourceType = .PhotoLibrary
+            pickerController.sourceType = .photoLibrary
         } else {
             // 4. We check if we are running on am iPhone or iPad (ie: not a simulator)
             //    If so, we open up the pickerController's Camera (Front Camera)
-            pickerController.sourceType = .Camera
-            pickerController.cameraDevice = .Front
-            pickerController.cameraCaptureMode = .Photo
+            pickerController.sourceType = .camera
+            pickerController.cameraDevice = .front
+            pickerController.cameraCaptureMode = .photo
         }
         
         // Preset the pickerController on screen
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        self.present(pickerController, animated: true, completion: nil)
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         // 1. When the delegate method is returned, it passes along a dictionary called info.
         //    This dictionary contains multiple things that maybe useful to us.
@@ -51,11 +51,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             // setting the compression quality to 90%
             if let imageData = UIImageJPEGRepresentation(image, 0.9),
                 let imageFile = PFFile(data: imageData),
-                let user = PFUser.currentUser(){
+                let user = PFUser.current(){
                     
                     // avatarImage is a new column in our User table
                     user["avatarImage"] = imageFile
-                    user.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    user.saveInBackground(block: { (success, error) -> Void in
                         if success {
                             // set our profileImageView to be the image we have picked
                             let image = UIImage(data: imageData)
@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         //3. We remember to dismiss the Image Picker from our screen.
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -82,15 +82,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let user = PFUser.currentUser(){
+        if let user = PFUser.current(){
             usernameLabel.text = user.username
             
             if let imageFile = user["avatarImage"] as? PFFile {
                 
-                imageFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                imageFile.getDataInBackground(block: { (data, error) -> Void in
                     if let imageData = data {
                         self.profileImageView.image = UIImage(data: imageData)
                     }

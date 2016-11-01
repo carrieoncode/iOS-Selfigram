@@ -18,9 +18,9 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
     
     func getPosts() {
         if let query = Post.query() {
-            query.orderByDescending("createdAt")
+            query.order(byDescending: "createdAt")
             query.includeKey("user")
-            query.findObjectsInBackgroundWithBlock({ (posts, error) -> Void in
+            query.findObjectsInBackground(block: { (posts, error) -> Void in
                 
                 if let posts = posts as? [Post]{
                     self.posts = posts
@@ -43,13 +43,13 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
     }
     
     
-    @IBAction func doubleTappedSelfie(sender: UITapGestureRecognizer) {
+    @IBAction func doubleTappedSelfie(_ sender: UITapGestureRecognizer) {
         
         print("double tapped selfie")
         
-        let tapLocation = sender.locationInView(tableView)
-        if let indexPathAtTapLocation = tableView.indexPathForRowAtPoint(tapLocation){
-            let cell = tableView.cellForRowAtIndexPath(indexPathAtTapLocation) as! SelfieCell
+        let tapLocation = sender.location(in: tableView)
+        if let indexPathAtTapLocation = tableView.indexPathForRow(at: tapLocation){
+            let cell = tableView.cellForRow(at: indexPathAtTapLocation) as! SelfieCell
             cell.tapAnimation()
         }
         
@@ -61,7 +61,7 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
     
     
     
-    @IBAction func refreshPulled(sender: UIRefreshControl) {
+    @IBAction func refreshPulled(_ sender: UIRefreshControl) {
         getPosts()
     }
     
@@ -72,16 +72,16 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.posts.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! SelfieCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! SelfieCell
         
         let post = self.posts[indexPath.row]
         
@@ -90,7 +90,7 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
         return cell
     }
     
-    @IBAction func cameraButtonPressed(sender: AnyObject) {
+    @IBAction func cameraButtonPressed(_ sender: AnyObject) {
         
         // 1: Create an ImagePickerController
         let pickerController = UIImagePickerController()
@@ -103,21 +103,21 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
         if TARGET_OS_SIMULATOR == 1 {
             // 3. We check if we are running on a Simulator
             //    If so, we pick a photo from the simulators Photo Library
-            pickerController.sourceType = .PhotoLibrary
+            pickerController.sourceType = .photoLibrary
         } else {
             // 4. We check if we are running on am iPhone or iPad (ie: not a simulator)
             //    If so, we open up the pickerController's Camera (Front Camera)
-            pickerController.sourceType = .Camera
-            pickerController.cameraDevice = .Front
-            pickerController.cameraCaptureMode = .Photo
+            pickerController.sourceType = .camera
+            pickerController.cameraDevice = .front
+            pickerController.cameraCaptureMode = .photo
         }
         
         // Preset the pickerController on screen
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        self.present(pickerController, animated: true, completion: nil)
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         // 1. When the delegate method is returned, it passes along a dictionary called info.
         //    This dictionary contains multiple things that maybe useful to us.
@@ -127,23 +127,23 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
             // setting the compression quality to 90%
             if let imageData = UIImageJPEGRepresentation(image, 0.9),
                 let imageFile = PFFile(data: imageData),
-                let user = PFUser.currentUser(){
+                let user = PFUser.current(){
                     
                     //2. We create a Post object from the image
                     let post = Post(image: imageFile, user: user, comment: "A Selfie")
 
-                    post.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    post.saveInBackground(block: { (success, error) -> Void in
                         if success {
                             print("Post successfully saved in Parse")
                             
                             //3. Add post to our posts array, chose index 0 so that it will be added
                             //   to the top of your table instead of at the bottom (default behaviour)
-                            self.posts.insert(post, atIndex: 0)
+                            self.posts.insert(post, at: 0)
                             
                             //4. Now that we have added a post, updating our table
                             //   We are just inserting our new Post instead of reloading our whole tableView
                             //   Both method would work, however, this gives us a cool animation for free
-                            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
+                            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
                             
                         }
                     })
@@ -151,7 +151,7 @@ class FeedViewController: UITableViewController, UIImagePickerControllerDelegate
         }
         
         //5. We remember to dismiss the Image Picker from our screen.
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
