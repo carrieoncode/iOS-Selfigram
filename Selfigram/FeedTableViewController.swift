@@ -17,6 +17,7 @@ class FeedTableViewController: UITableViewController, UIImagePickerControllerDel
         super.viewDidLoad()
         
         getPosts()
+        navigationItem.titleView = UIImageView(image: UIImage(named: "Selfigram-logo"))
     }
     
     func getPosts() {
