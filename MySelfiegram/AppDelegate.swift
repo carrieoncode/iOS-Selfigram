@@ -19,13 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         Post.registerSubclass()
-        Parse.setApplicationId("53KlejteeaBXtJzEQJ4CxePhCIQKqFlAMDirRCCk",
-            clientKey: "M2z6HCskNpNgknQJelPWXnCcLY8PgCrFXWR4ooVZ")
+        
+        let configuration = ParseClientConfiguration { clientConfiguration in
+            clientConfiguration.applicationId = "5CDeHX2xNhW11QZXr9AvtBbEQY0lft4jpUuMFt9g"
+            clientConfiguration.server = "https://parse-server-ios-main.herokuapp.com/parse"
+        }
+        Parse.initialize(with: configuration)
         
         
         let user = PFUser()
-        let username = "danny"
-        let password = "mathews"
+        let username = "sam"
+        let password = "meech-ward"
         user.username = username
         user.password = password
         user.signUpInBackground { (success, error) -> Void in
