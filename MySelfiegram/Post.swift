@@ -13,7 +13,7 @@ class Post:PFObject, PFSubclassing {
     @NSManaged var image:PFFile
     @NSManaged var user:PFUser
     @NSManaged var comment:String
-    var likes: PFRelation! {
+    var likes: PFRelation<PFObject>! {
         return relation(forKey: "likes")
     }
     
