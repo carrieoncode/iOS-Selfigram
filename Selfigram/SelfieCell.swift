@@ -22,10 +22,13 @@ class SelfieCell: UITableViewCell {
                 
                 let imageFile = post.image
                 imageFile.getDataInBackground(block: { (data, error) -> Void in
-                    if let data = data {
-                        let image = UIImage(data: data)
-                        self.selfieImageView.image = image
+                    guard let data = data else {
+                        print("Error: \(error)")
+                        return
                     }
+                    
+                    let image = UIImage(data: data)
+                    self.selfieImageView.image = image
                 })
                 
                 usernameLabel.text = post.user.username
