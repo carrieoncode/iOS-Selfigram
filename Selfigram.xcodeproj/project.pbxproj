@@ -143,13 +143,10 @@
 				221D057D1DC12D4F00721CD8 /* AppDelegate.swift */,
 				221D057F1DC12D4F00721CD8 /* ViewController.swift */,
 				2291663E1DC1722B005902D3 /* ProfileViewController.swift */,
-				229166401DC19B35005902D3 /* User.swift */,
-				229166421DC19B98005902D3 /* Post.swift */,
 				22484D6B1DC23DFA004FEDF6 /* FeedTableViewController.swift */,
-				221339A01DC2563500364541 /* SelfieCell.swift */,
-				2203FFE31DCAB59B00D8CBF8 /* Activity.swift */,
 				222DEBA81DCB9965001C636B /* ActivityViewController.swift */,
-				222DEBA61DCB9953001C636B /* ActivityCell.swift */,
+				223079CA1E58EE37004ACA45 /* Views */,
+				223079C91E58EE24004ACA45 /* Models */,
 				221D05811DC12D4F00721CD8 /* Main.storyboard */,
 				221D05841DC12D4F00721CD8 /* Assets.xcassets */,
 				221D05861DC12D4F00721CD8 /* LaunchScreen.storyboard */,
@@ -174,6 +171,25 @@
 				221D059F1DC12D4F00721CD8 /* Info.plist */,
 			);
 			path = SelfigramUITests;
+			sourceTree = "<group>";
+		};
+		223079C91E58EE24004ACA45 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				229166401DC19B35005902D3 /* User.swift */,
+				229166421DC19B98005902D3 /* Post.swift */,
+				2203FFE31DCAB59B00D8CBF8 /* Activity.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		223079CA1E58EE37004ACA45 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				221339A01DC2563500364541 /* SelfieCell.swift */,
+				222DEBA61DCB9953001C636B /* ActivityCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F1B576F17C7E8F31E4BE26CA /* Pods */ = {
@@ -242,6 +258,7 @@
 				221D05961DC12D4F00721CD8 /* Frameworks */,
 				221D05971DC12D4F00721CD8 /* Resources */,
 				7EFB33AE2B5BB018751B153D /* [CP] Copy Pods Resources */,
+				23DEB5AA6A67F65030B1DE63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,7 +277,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Sam Meech-Ward";
 				TargetAttributes = {
 					221D05791DC12D4F00721CD8 = {
@@ -339,7 +356,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		23DEB5AA6A67F65030B1DE63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SelfigramUITests/Pods-SelfigramUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		582673B6FFF868A64E0198DA /* [CP] Check Pods Manifest.lock */ = {
@@ -354,7 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6BD68E3E837EA3903CD8F890 /* [CP] Embed Pods Frameworks */ = {
@@ -414,7 +446,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B1869FAD13E72C9C684C464B /* [CP] Embed Pods Frameworks */ = {
