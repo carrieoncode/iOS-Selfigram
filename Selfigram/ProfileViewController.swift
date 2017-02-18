@@ -55,17 +55,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         //    from pickerController when a specific event is triggered.
         pickerController.delegate = self
         
-        if TARGET_OS_SIMULATOR == 1 {
-            // 3. We check if we are running on a Simulator
-            //    If so, we pick a photo from the simulator’s Photo Library
-            // We need to do this because the simulator does not have a camera
-            pickerController.sourceType = .photoLibrary
-        } else {
-            // 4. We check if we are running on an iPhone or iPad (ie: not a simulator)
-            //    If so, we open up the pickerController's Camera (Front Camera, for selfies!)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            // 3. We check to see if the camera is availabel
+            // If so, we open up the pickerController's Camera (Front Camera, for selfies!)
             pickerController.sourceType = .camera
             pickerController.cameraDevice = .front
             pickerController.cameraCaptureMode = .photo
+        } else {
+            // If not, we pick a photo from the simulator’s Photo Library
+            // We need to do this because the simulator does not have a camera
+            pickerController.sourceType = .photoLibrary
         }
         
         // Preset the pickerController on screen
